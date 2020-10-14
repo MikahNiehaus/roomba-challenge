@@ -1,50 +1,106 @@
 import React, { Component } from 'react';
-import Tile from './Tile';
+import CleanTile from '../images/CleanTile.jpg';
+import DirtyTile from '../images/DirtyTile.jpg';
+import Roomba from '../images/Roomba.jpeg';
+// import Tile from './Tile';
 
-class Grid extends Component {
+export default class Grid extends Component  {
+    constructor(props) {
+        super(props);
+        this.state = {
+            roombaLocation: [1,1]
+        
+        };
+    }
+    componentDidMount(){
+       
+    //    this.props.setRoombaLocation([1,1]);
+          console.log("Starting Up Grid",this.state.initialRoombaLocation)
+          
+    }
 
-    printGrid = (array) => {
-        return array.map((row) => {
-            return <tr>
-                {row}
-            </tr>
-        });
-    };
+    startClick = (event) => {
+        event.preventDefault();
 
-    render() {
-        let count = Math.floor((Math.random() * 100000) + 1);
-        const grid = this.props.state.grid;
-        const width = grid.width;
-        const length = grid.length;
-        const arrayOfTiles = [];
+        console.log("worked")
 
-        for (let i = length - 1; i >= 0; i--) {
-            const row = [];
+        this.setState({
+            roombaLocation: [1,2]
+          });
+    }
+  
+    printGrid = () => {
 
-            for (let b = 0; b < width; b++) {
-                row.push(
-                        <td>
-                            <Tile
-                                x={b}
-                                y={i}
-                                dirt={this.props.state.dirt}
-                                roomba={this.props.state.roomba}
-                                key={count}
-                            />
-                        </td>
-                );
+      
+             
+        const data = {
+            "roomDimensions": [10, 10],
+            "initialRoombaLocation": [1, 1],
+            "dirtLocations": [
+              [1, 2],
+              [3, 5],
+              [5, 5],
+              [7, 9]
+            ],
+            "drivingInstructions": ["N","E","E","N","N","N","E","E","S","W","S","S","S","S","S"  ]
+          }
+          
+         
 
-                count++;
+        console.log(data.roomDimensions[0])
+        const hight = data.roomDimensions[0];
+        const width = data.roomDimensions[1];
+        const roombaLocation = this.state.roombaLocation;
+
+        const dirtLocations = data.dirtLocations;
+        const drivingInstructions = data.drivingInstructions;
+        console.log("test",dirtLocations)
+        let jsx = [];
+
+        let i = 0;
+        let x = 0;
+
+        while (hight > i){
+            while(width>x){
+                 let gridNum = [i,x]
+               
+                if (roombaLocation.toString().includes(gridNum.toString())){
+                    jsx.push(<img width="50" height="50" className={x} src={Roomba}/>);
+                }
+                else if (dirtLocations.toString().includes(gridNum.toString())){
+                    jsx.push(<img width="50" height="50" className={x} src={DirtyTile}/>);
+                    console.log("test")
+                } else {
+                    jsx.push(<img width="50" height="50" className={x} src={CleanTile}/>);
+
+                }
+               
+                x+=1;
             }
-
-            arrayOfTiles.push(row);
+            jsx.push(<div></div>)
+            x=0;
+            i += 1;
         }
+        console.log("jsx",jsx)
+        return jsx;
+       
+    };
+   
+    render() {
+      
 
         return (
             <div>
+                <center>
+                <form onSubmit={this.startClick}>
+               <input type="submit" style={{background: this.state.background}} value="Start"/>
+                </form>
+                {/* <button onClick={this.startClick()}>start</button> */}
+                </center>
                 <table>
                     <tbody>
-                        {this.printGrid(arrayOfTiles)}
+                        {/* {this.printGrid()} */}
+                        {this.printGrid().map(x => x)}
                     </tbody>
                 </table>
             </div>
@@ -52,4 +108,3 @@ class Grid extends Component {
     }
 }
 
-export default Grid;
