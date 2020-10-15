@@ -63,11 +63,12 @@ componentDidMount(){
         ],
         "drivingInstructions": ["N","E","E","N","N","N","E","E","S","W","S","S","S","S","S"  ]
       }
-      // this.setState({
-      //   data: data,
+      console.log("test data")
+      this.setState({
+        data: data
        
-      // });
-      // console.log("data",this.state.data)
+      });
+      // console.log("test data",this.state.data.drivingInstructions)
       this.props.onGridSubmit(data)
     }
 
