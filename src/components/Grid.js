@@ -73,7 +73,7 @@ function task(i) {
           
         break;
       case "S":
-          if((location[0] + 1) == roomDimension[0]){
+          if((location[0] ) == roomDimension[0]){
               hit += 1;
             }else{    
               location[0] += 1     
@@ -91,7 +91,7 @@ function task(i) {
             }
         break;
         case "E":
-          if((location[1] + 1) == roomDimension[1]){
+          if((location[1] ) == roomDimension[1]){
               hit += 1;
             }else{
               location[1] += 1
