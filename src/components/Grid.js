@@ -51,85 +51,77 @@ export default class Grid extends Component  {
         let location= []
         location = this.state.roombaLocation;
         const drivingInstructions =  this.state.drivingInstructions;
+        const roomDimension = this.state.roomDimensions
         console.log("worked",location)
-        let save = []
         let i = 0;
         let hit = 0;
-        while (drivingInstructions.length>i){
-            switch(drivingInstructions[i]) {
-                case "N":
-                    if((location[0] - 1) == 0){
-                      hit += 1;
-                    }else{
-                    location[0] -= 1
-                    save.push(location)
-                    }
-                    
-                  break;
-                case "S":
-                    if((location[0] + 1) == this.state.roomDimensions[1]){
-                        hit += 1;
-                        
-                      }else{    
-                        location[0] += 1            
-                      save.push(location)
-                      }
-                  break;
-                   case "W":
-                    if((location[1] - 1) < 1){
-                        hit += 1;
-                      }else{
-                        location[1] -= 1
-                      save.push(location)
-                      }
-                  break;
-                  case "E":
-                    if((location[1] + 1) == this.state.roomDimensions[1]){
-                        hit += 1;
-                      }else{
-                        location[1] += 1
-                      save.push(location)
-                      }
-                    break;
-                default:
-                  // code block
-              }
-              // let dirtLocations = this.state.dirtLocations
-              // setTimeout(this.myFunction(location,hit), (1+i) * 1000)
-        //       setTimeout(function(){ 
-        //         console.log("update"); 
-        //       this.setState({
-        //         roombaLocation: location,
-        //         hit: hit
-        //       }); 
-        //        this.printGrid(location);
-        //       }, (1+i) * 1000);
+        let myGrid = this;
+while (drivingInstructions.length>i) { 
+  task(i); 
+   i+=1; 
+} 
+function task(i) { 
+  setTimeout(function() { 
+    switch(drivingInstructions[i]) {
+      case "N":
+          if((location[0] - 1) == 0){
+            hit += 1;
+          }else{
+           location[0] -= 1
+           console.log("new location",location)
+          }
+          
+        break;
+      case "S":
+          if((location[0] + 1) == roomDimension[0]){
+              hit += 1;
+            }else{    
+              location[0] += 1     
+           console.log("new location",location)
 
-        //  console.log("time",(1+i) * 1000)
+            }
+        break;
+         case "W":
+          if((location[1] - 1) < 1){
+              hit += 1;
+            }else{
+              location[1] -= 1
+           console.log("new location",location)
 
+            }
+        break;
+        case "E":
+          if((location[1] + 1) == roomDimension[1]){
+              hit += 1;
+            }else{
+              location[1] += 1
+           console.log("new location",location)
 
-         this.change = setTimeout(() => {
-          console.log("update"); 
-              this.setState({
-                roombaLocation: location,
-                hit: hit
-              }); 
-               this.printGrid(location);
-        }, (1+i) * 1000)
-
-            i+=1;
-        }
+            }
+          break;
+      default:
+        console.log("Data not recognized"); 
+    } 
+    console.log("update",i,location, drivingInstructions[i],roomDimension); 
+    
+    myGrid.setState({
+      roombaLocation: location,
+      hit: hit
+    }); 
+    myGrid.printGrid(location);
+  }, 1000 * i); 
+} 
     
     }
 
     myFunction(location,hit){
-      //console.log("time")
+      console.log("time")
    
-      // this.setState({
-      //   roombaLocation: location,
-      //   hit: hit
-      // }); 
-      //  this.printGrid(location)
+      this.setState({
+        roombaLocation: location,
+        hit: hit
+      }); 
+       this.printGrid(location)
     }
 
 
@@ -154,25 +146,28 @@ while(dirtLocations.length>i){
 this.setState({
   dirtLocations: newDirtLocations
 })
-//console.log("dirtLocations",newDirtLocations)
 
 return newDirtLocations
+ }
+
+ includesLocation(dirtLocations,gridNum){
+       let bool = false
+       let i = 0;
+        while (dirtLocations.length>i){
+         // console.log("!!!!",dirtLocations[i].toString(),gridNum.toString())
+          if(dirtLocations[i].toString().includes(gridNum.toString())){
+            bool = true;
+              }
+          i++;
+        }
+        return bool;
+      
  }
 
   
     printGrid = () => {
        console.log("printGrid")
-        // const data = {
-        //     "roomDimensions": [10, 10],
-        //     "initialRoombaLocation": [1, 1],
-        //     "dirtLocations": [
-        //       [1, 2],
-        //       [3, 5],
-        //       [5, 5],
-        //       [7, 9]
-        //     ],
-        //     "drivingInstructions": ["N","E","E","N","N","N","E","E","S","W","S","S","S","S","S"  ]
-        //   }
+    
         let roombaLocation = this.state.roombaLocation
         let jsx = [];
 
@@ -184,7 +179,7 @@ return newDirtLocations
         // const ;
 
         let dirtLocations = this.state.dirtLocations;
-        // //console.log("test",dirtLocations)
+        
 
         let i = 0;
         let x = 0;
@@ -192,7 +187,6 @@ return newDirtLocations
         while (hight > i){
             while(width > x){
                  let gridNum = [i+1,x+1]
-                 
                  if (dirtLocations.toString().includes(roombaLocation.toString())){
                   dirtLocations = this.CleanTile(roombaLocation)
                   this.setState({
@@ -205,7 +199,9 @@ return newDirtLocations
                 if (roombaLocation.toString().includes(gridNum.toString())){
                     jsx.push(<img width="50" height="50" className={x} src={Roomba}/>);
                 }
-                else if (dirtLocations.toString().includes(gridNum.toString())){
+                else if (this.includesLocation(dirtLocations,gridNum)===true){
+                console.log("!!!!!!!!!!!!",dirtLocations,gridNum)
+
                     jsx.push(<img width="50" height="50" className={x} src={DirtyTile}/>);
                 } else {
                     jsx.push(<img width="50" height="50" className={x} src={CleanTile}/>);
@@ -236,8 +232,10 @@ return newDirtLocations
                 <form onSubmit={this.startClick}>
                <input type="submit" style={{background: this.state.background}} value="Start"/>
                 </form>
-                {/* <button onClick={this.startClick()}>start</button> */}
                 </center>
+                <right><h1>Hit = {this.state.hit}</h1></right>
+                <right><h1>Cleaned = {this.state.cleaned}</h1></right>
+               
                 <table>
                     <tbody>
                         {this.printGrid().map(x => x)}
