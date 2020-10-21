@@ -17,7 +17,7 @@ React JS, Jest, Sinon, Enzyme.
 
 ## Installation
 
-- Run 'git clone https://github.com/blackgraywolf/roomba-challenge' in your terminal
+- Run 'git clone git@github.com:blackgraywolf/roomba-challenge.git' in your terminal
 - Run 'cd roomba-challenge'
 - Run 'npm install'
 - Run 'npm start'
