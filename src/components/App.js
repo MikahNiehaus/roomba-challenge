@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RoombaInputs from './RoombaInputs';
+// import RoombaInputs from './RoombaInputs';
 
 import './App.css'
 import Grid from './Grid';
@@ -19,7 +19,6 @@ class App extends Component {
         console.log("set data")
            this.setState({
         data: data,
-       
       });
     }
    
@@ -32,11 +31,7 @@ class App extends Component {
                 </div>
                  
                     <center>
-                    <RoombaInputs
-                        // onChange={this.handleChange}
-                        onGridSubmit={this.handleSubmit}
-                        // grid={this.state.grid}
-                    /></center>
+                  </center>
                     <Grid data={this.state.data}></Grid>
             </div>
         );

@@ -1,52 +1,14 @@
 # Roomba
 
-**My task was to build a virtual hoover**
+**My task was to build a virtual roomba**
 
 **Task specifications**
 
-You will write a web application that drives an imaginary robotic hoover (much like a Roomba) around an equally imaginary room based on:
+The sample input gives you the room dimensions, initial location of the roomba, the dirt locations, and the driving instructions. The dimensions and locations are arrays with the first number being the x coordinate and the second number being the y coordinate. For example, given room dimensions [5, 10] the room would be 5 units wide and 10 units high. 
+The driving instructions are given as North, South, East, and West. So, if the roomba’s current position is (1, 2) and the next driving instruction to process is “N” then the roomba’s final position for that step would be (1, 3). The roomba can’t navigate outside of the room dimensions. 
+If the driving instruction results in the roomba hitting a wal the roomba should not move from its current location and the total wal hits should be incremented by 1. For example, if the roomba’s current location is (1, 0) and the next driving instruction is “S”, then the roomba’s final position for that step would stil be (1, 0) and the total wal hits would be incremented by 1. 
+After processing al the driving instructions, print out the final location of the roomba, the total distance traveled, the total amount of dirt col ected, and the total number of times it ran into a wal . 
 
-    room dimensions as X and Y coordinates, identifying the top right corner of the room rectangle. This room is divided up in a grid based on these dimensions; a room that has dimensions X: 5 and Y: 5 has 5 columns and 5 rows, so 25 possible hoover positions. The bottom left corner is the point of origin for our coordinate system, so as the room contains all coordinates its bottom left corner is defined by X: 0 and Y: 0.
-    an initial hoover position (X and Y coordinates like patches of dirt)
-    locations of patches of dirt, also defined by X and Y coordinates identifying the bottom left corner of those grid positions.
-
-The room will be rectangular, has no obstacles (except the room walls), no doors and all locations in the room will be clean (hoovering has no effect) except for the locations of the patches of dirt presented in the program input.
-
-Placing the hoover on a patch of dirt ("hoovering") removes the patch of dirt so that patch is then clean for the remainder of the program run. The hoover is always on - there is no need to enable it.
-
-Driving into a wall has no effect (the robot skids in place).
-Goal
-
-The goal of the application is to take the room dimensions, the locations of the dirt patches, and the hoover location as input and to allow the user to navigate the robot around the room.
-
-As a minimum you should build an interface with:
-
-    A way to enter the following configuration:
-        the room dimensions (length and width)
-        the starting location of the robot (as coordinates)
-        the locations of zero or more dirt patches
-    Four buttons which will move the robot North, South, East and West
-    A visual representation of the room state
-    A text based representation of the robot's position within the room
-    A text based representation of the number of dirt patches which have been hoovered
-
-Deliverable
-
-The program:
-
-    link to a running web page
-    must run in all modern browsers
-    can be written in any client side programming language.
-    can make use of any existing open source libraries that don't directly address the problem statement (use your best judgement)
-
-What will be especially considered:
-
-    Actually solving the problem
-    Overall user experience
-    Code organisation
-    Quality
-    Testing
-    Readability
 
 ## Tech Stack
 
@@ -171,27 +133,7 @@ A timer that counts down while you navigate the grid?
 Many opportunities to extend the application
 
 
-## Screenshots of use!
-
-Below you can see a screenshot of the application once loaded.
-
-This is the landing page where you insert your room, dirt, and roomba inputs.
-
-<a href="https://ibb.co/b4Ga5z"><img src="https://preview.ibb.co/nFYNkz/Screen_Shot_2018_08_23_at_10_02_19.png" alt="Screen_Shot_2018_08_23_at_10_02_19" border="0"></a>
-
-After pressing the submit button the page reloads to show you the grid you created, along with
-the dirt patch you inserted. Also Roomba is symbolised by the Hoover image.
-You use the north south east west buttons at the top of the grid to
-move Roomba. Once you move Roomba to the dirty square it hoovers it up and it
-becomes a nice white tile like the rest of the grid.
-
-<a href="https://ibb.co/doR05z"><img src="https://preview.ibb.co/eM1YQz/Screen_Shot_2018_08_23_at_09_51_49.png" alt="Screen_Shot_2018_08_23_at_09_51_49" border="0"></a>
-
-And this last image is of the tests being ran.
-
-<a href="https://ibb.co/ejQiT9"><img src="https://preview.ibb.co/fH0Ho9/Screen_Shot_2018_08_08_at_23_48_11.png" alt="Screen_Shot_2018_08_08_at_23_48_11" border="0"></a>
-
 
 ## Contributors
 
-not done yet do not clone
+Mikah Niehaus
